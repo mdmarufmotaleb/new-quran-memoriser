@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Our Quran Memoriser</title>
+    <link rel="stylesheet" href="css/styles.css" />
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+</head>
+<body>
+    <header>
+        <h1>Our Quran Memoriser</h1>
+    </header>
+
+    <main class="container">
+        <section class="filters">
+            <div class="filter-row">
+                <div class="filter-group">
+                    <label>Select from:</label>
+                    <select id="from-surah">
+                        <option value="1">1. الفاتحة (The Opening)</option>
+                        <option value="2">2. البقرة (The Cow)</option>
+                        <option value="3">3. آل عمران (The Family of Imran)</option>
+                        <option value="4">4. النساء (The Women)</option>
+                        <option value="5">5. المائدة (The Table Spread)</option>
+                        <option value="6">6. الأنعام (The Cattle)</option>
+                        <option value="7">7. الأعراف (The Heights)</option>
+                        <option value="8">8. الأنفال (The Spoils of War)</option>
+                        <option value="9">9. التوبة (The Repentance)</option>
+                        <option value="10">10. يونس (Jonah)</option>
+                        <option value="11">11. هود (Hud)</option>
+                        <option value="12">12. يوسف (Joseph)</option>
+                        <option value="13">13. الرعد (The Thunder)</option>
+                        <option value="14">14. إبراهيم (Abraham)</option>
+                        <option value="15">15. الحجر (The Rocky Tract)</option>
+                        <option value="16">16. النحل (The Bee)</option>
+                        <option value="17">17. الإسراء (The Night Journey)</option>
+                        <option value="18">18. الكهف (The Cave)</option>
+                        <option value="19">19. مريم (Mary)</option>
+                        <option value="20">20. طه (Ta-Ha)</option>
+                        <option value="21">21. الأنبياء (The Prophets)</option>
+                        <option value="22">22. الحج (The Pilgrimage)</option>
+                        <option value="23">23. المؤمنون (The Believers)</option>
+                        <option value="24">24. النور (The Light)</option>
+                        <option value="25">25. الفرقان (The Criterion)</option>
+                        <option value="26">26. الشعراء (The Poets)</option>
+                        <option value="27">27. النمل (The Ant)</option>
+                        <option value="28">28. القصص (The Stories)</option>
+                        <option value="29">29. العنكبوت (The Spider)</option>
+                        <option value="30">30. الروم (The Romans)</option>
+                        <option value="31">31. لقمان (Luqman)</option>
+                        <option value="32">32. السجدة (The Prostration)</option>
+                        <option value="33">33. الأحزاب (The Confederates)</option>
+                        <option value="34">34. سبأ (Sheba)</option>
+                        <option value="35">35. فاطر (The Originator)</option>
+                        <option value="36">36. يس (Ya-Sin)</option>
+                        <option value="37">37. الصافات (Those who set the Ranks)</option>
+                        <option value="38">38. ص (Sad)</option>
+                        <option value="39">39. الزمر (The Groups)</option>
+                        <option value="40">40. غافر (The Forgiver)</option>
+                        <option value="41">41. فصلت (Explained in Detail)</option>
+                        <option value="42">42. الشورى (The Consultation)</option>
+                        <option value="43">43. الزخرف (The Gold Adornments)</option>
+                        <option value="44">44. الدخان (The Smoke)</option>
+                        <option value="45">45. الجاثية (The Crouching)</option>
+                        <option value="46">46. الأحقاف (The Wind-Curved Sandhills)</option>
+                        <option value="47">47. محمد (Muhammad)</option>
+                        <option value="48">48. الفتح (The Victory)</option>
+                        <option value="49">49. الحجرات (The Rooms)</option>
+                        <option value="50">50. ق (Qaf)</option>
+                        <option value="51">51. الذاريات (The Winnowing Winds)</option>
+                        <option value="52">52. الطور (The Mount)</option>
+                        <option value="53">53. النجم (The Star)</option>
+                        <option value="54">54. القمر (The Moon)</option>
+                        <option value="55">55. الرحمن (The Most Merciful)</option>
+                        <option value="56">56. الواقعة (The Inevitable)</option>
+                        <option value="57">57. الحديد (The Iron)</option>
+                        <option value="58">58. المجادلة (The Pleading Woman)</option>
+                        <option value="59">59. الحشر (The Exile)</option>
+                        <option value="60">60. الممتحنة (She that is to be examined)</option>
+                        <option value="61">61. الصف (The Ranks)</option>
+                        <option value="62">62. الجمعة (The Congregation)</option>
+                        <option value="63">63. المنافقون (The Hypocrites)</option>
+                        <option value="64">64. التغابن (Mutual Disillusion)</option>
+                        <option value="65">65. الطلاق (The Divorce)</option>
+                        <option value="66">66. التحريم (The Prohibition)</option>
+                        <option value="67">67. الملك (The Sovereignty)</option>
+                        <option value="68">68. القلم (The Pen)</option>
+                        <option value="69">69. الحاقة (The Reality)</option>
+                        <option value="70">70. المعارج (The Ascending Stairways)</option>
+                        <option value="71">71. نوح (Noah)</option>
+                        <option value="72">72. الجن (The Jinn)</option>
+                        <option value="73">73. المزمل (The Enshrouded One)</option>
+                        <option value="74">74. المدثر (The Cloaked One)</option>
+                        <option value="75">75. القيامة (The Resurrection)</option>
+                        <option value="76">76. الإنسان (Man)</option>
+                        <option value="77">77. المرسلات (The Emissaries)</option>
+                        <option value="78">78. النبأ (The Tidings)</option>
+                        <option value="79">79. النازعات (Those who drag forth)</option>
+                        <option value="80">80. عبس (He Frowned)</option>
+                        <option value="81">81. التكوير (The Overthrowing)</option>
+                        <option value="82">82. الإنفطار (The Cleaving)</option>
+                        <option value="83">83. المطففين (Defrauding)</option>
+                        <option value="84">84. الإنشقاق (The Splitting Open)</option>
+                        <option value="85">85. البروج (The Mansions of the Stars)</option>
+                        <option value="86">86. الطارق (The Morning Star)</option>
+                        <option value="87">87. الأعلى (The Most High)</option>
+                        <option value="88">88. الغاشية (The Overwhelming)</option>
+                        <option value="89">89. الفجر (The Dawn)</option>
+                        <option value="90">90. البلد (The City)</option>
+                        <option value="91">91. الشمس (The Sun)</option>
+                        <option value="92">92. الليل (The Night)</option>
+                        <option value="93">93. الضحى (The Morning Hours)</option>
+                        <option value="94">94. الشرح (The Relief)</option>
+                        <option value="95">95. التين (The Fig)</option>
+                        <option value="96">96. العلق (The Clot)</option>
+                        <option value="97">97. القدر (The Power)</option>
+                        <option value="98">98. البينة (The Clear Proof)</option>
+                        <option value="99">99. الزلزلة (The Earthquake)</option>
+                        <option value="100">100. العاديات (The Courser)</option>
+                        <option value="101">101. القارعة (The Striking Calamity)</option>
+                        <option value="102">102. التكاثر (The Rivalry in World Increase)</option>
+                        <option value="103">103. العصر (The Declining Day)</option>
+                        <option value="104">104. الهمزة (The Slanderer)</option>
+                        <option value="105">105. الفيل (The Elephant)</option>
+                        <option value="106">106. قريش (Quraysh)</option>
+                        <option value="107">107. الماعون (The Small Kindnesses)</option>
+                        <option value="108">108. الكوثر (Abundance)</option>
+                        <option value="109">109. الكافرون (The Disbelievers)</option>
+                        <option value="110">110. النصر (The Divine Support)</option>
+                        <option value="111">111. المسد (The Palm Fibre)</option>
+                        <option value="112">112. الإخلاص (Sincerity)</option>
+                        <option value="113">113. الفلق (The Daybreak)</option>
+                        <option value="114">114. الناس (Mankind)</option>    
+                    </select>          
+                    <select id="from-verse">
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label>Select to:</label>
+                    <select id="to-surah">
+                        <option value="1">1. الفاتحة (The Opening)</option>
+                        <option value="2">2. البقرة (The Cow)</option>
+                        <option value="3">3. آل عمران (The Family of Imran)</option>
+                        <option value="4">4. النساء (The Women)</option>
+                        <option value="5">5. المائدة (The Table Spread)</option>
+                        <option value="6">6. الأنعام (The Cattle)</option>
+                        <option value="7">7. الأعراف (The Heights)</option>
+                        <option value="8">8. الأنفال (The Spoils of War)</option>
+                        <option value="9">9. التوبة (The Repentance)</option>
+                        <option value="10">10. يونس (Jonah)</option>
+                        <option value="11">11. هود (Hud)</option>
+                        <option value="12">12. يوسف (Joseph)</option>
+                        <option value="13">13. الرعد (The Thunder)</option>
+                        <option value="14">14. إبراهيم (Abraham)</option>
+                        <option value="15">15. الحجر (The Rocky Tract)</option>
+                        <option value="16">16. النحل (The Bee)</option>
+                        <option value="17">17. الإسراء (The Night Journey)</option>
+                        <option value="18">18. الكهف (The Cave)</option>
+                        <option value="19">19. مريم (Mary)</option>
+                        <option value="20">20. طه (Ta-Ha)</option>
+                        <option value="21">21. الأنبياء (The Prophets)</option>
+                        <option value="22">22. الحج (The Pilgrimage)</option>
+                        <option value="23">23. المؤمنون (The Believers)</option>
+                        <option value="24">24. النور (The Light)</option>
+                        <option value="25">25. الفرقان (The Criterion)</option>
+                        <option value="26">26. الشعراء (The Poets)</option>
+                        <option value="27">27. النمل (The Ant)</option>
+                        <option value="28">28. القصص (The Stories)</option>
+                        <option value="29">29. العنكبوت (The Spider)</option>
+                        <option value="30">30. الروم (The Romans)</option>
+                        <option value="31">31. لقمان (Luqman)</option>
+                        <option value="32">32. السجدة (The Prostration)</option>
+                        <option value="33">33. الأحزاب (The Confederates)</option>
+                        <option value="34">34. سبأ (Sheba)</option>
+                        <option value="35">35. فاطر (The Originator)</option>
+                        <option value="36">36. يس (Ya-Sin)</option>
+                        <option value="37">37. الصافات (Those who set the Ranks)</option>
+                        <option value="38">38. ص (Sad)</option>
+                        <option value="39">39. الزمر (The Groups)</option>
+                        <option value="40">40. غافر (The Forgiver)</option>
+                        <option value="41">41. فصلت (Explained in Detail)</option>
+                        <option value="42">42. الشورى (The Consultation)</option>
+                        <option value="43">43. الزخرف (The Gold Adornments)</option>
+                        <option value="44">44. الدخان (The Smoke)</option>
+                        <option value="45">45. الجاثية (The Crouching)</option>
+                        <option value="46">46. الأحقاف (The Wind-Curved Sandhills)</option>
+                        <option value="47">47. محمد (Muhammad)</option>
+                        <option value="48">48. الفتح (The Victory)</option>
+                        <option value="49">49. الحجرات (The Rooms)</option>
+                        <option value="50">50. ق (Qaf)</option>
+                        <option value="51">51. الذاريات (The Winnowing Winds)</option>
+                        <option value="52">52. الطور (The Mount)</option>
+                        <option value="53">53. النجم (The Star)</option>
+                        <option value="54">54. القمر (The Moon)</option>
+                        <option value="55">55. الرحمن (The Most Merciful)</option>
+                        <option value="56">56. الواقعة (The Inevitable)</option>
+                        <option value="57">57. الحديد (The Iron)</option>
+                        <option value="58">58. المجادلة (The Pleading Woman)</option>
+                        <option value="59">59. الحشر (The Exile)</option>
+                        <option value="60">60. الممتحنة (She that is to be examined)</option>
+                        <option value="61">61. الصف (The Ranks)</option>
+                        <option value="62">62. الجمعة (The Congregation)</option>
+                        <option value="63">63. المنافقون (The Hypocrites)</option>
+                        <option value="64">64. التغابن (Mutual Disillusion)</option>
+                        <option value="65">65. الطلاق (The Divorce)</option>
+                        <option value="66">66. التحريم (The Prohibition)</option>
+                        <option value="67">67. الملك (The Sovereignty)</option>
+                        <option value="68">68. القلم (The Pen)</option>
+                        <option value="69">69. الحاقة (The Reality)</option>
+                        <option value="70">70. المعارج (The Ascending Stairways)</option>
+                        <option value="71">71. نوح (Noah)</option>
+                        <option value="72">72. الجن (The Jinn)</option>
+                        <option value="73">73. المزمل (The Enshrouded One)</option>
+                        <option value="74">74. المدثر (The Cloaked One)</option>
+                        <option value="75">75. القيامة (The Resurrection)</option>
+                        <option value="76">76. الإنسان (Man)</option>
+                        <option value="77">77. المرسلات (The Emissaries)</option>
+                        <option value="78">78. النبأ (The Tidings)</option>
+                        <option value="79">79. النازعات (Those who drag forth)</option>
+                        <option value="80">80. عبس (He Frowned)</option>
+                        <option value="81">81. التكوير (The Overthrowing)</option>
+                        <option value="82">82. الإنفطار (The Cleaving)</option>
+                        <option value="83">83. المطففين (Defrauding)</option>
+                        <option value="84">84. الإنشقاق (The Splitting Open)</option>
+                        <option value="85">85. البروج (The Mansions of the Stars)</option>
+                        <option value="86">86. الطارق (The Morning Star)</option>
+                        <option value="87">87. الأعلى (The Most High)</option>
+                        <option value="88">88. الغاشية (The Overwhelming)</option>
+                        <option value="89">89. الفجر (The Dawn)</option>
+                        <option value="90">90. البلد (The City)</option>
+                        <option value="91">91. الشمس (The Sun)</option>
+                        <option value="92">92. الليل (The Night)</option>
+                        <option value="93">93. الضحى (The Morning Hours)</option>
+                        <option value="94">94. الشرح (The Relief)</option>
+                        <option value="95">95. التين (The Fig)</option>
+                        <option value="96">96. العلق (The Clot)</option>
+                        <option value="97">97. القدر (The Power)</option>
+                        <option value="98">98. البينة (The Clear Proof)</option>
+                        <option value="99">99. الزلزلة (The Earthquake)</option>
+                        <option value="100">100. العاديات (The Courser)</option>
+                        <option value="101">101. القارعة (The Striking Calamity)</option>
+                        <option value="102">102. التكاثر (The Rivalry in World Increase)</option>
+                        <option value="103">103. العصر (The Declining Day)</option>
+                        <option value="104">104. الهمزة (The Slanderer)</option>
+                        <option value="105">105. الفيل (The Elephant)</option>
+                        <option value="106">106. قريش (Quraysh)</option>
+                        <option value="107">107. الماعون (The Small Kindnesses)</option>
+                        <option value="108">108. الكوثر (Abundance)</option>
+                        <option value="109">109. الكافرون (The Disbelievers)</option>
+                        <option value="110">110. النصر (The Divine Support)</option>
+                        <option value="111">111. المسد (The Palm Fibre)</option>
+                        <option value="112">112. الإخلاص (Sincerity)</option>
+                        <option value="113">113. الفلق (The Daybreak)</option>
+                        <option value="114">114. الناس (Mankind)</option>
+                    </select>                    
+                    <select id="to-verse">
+                    </select>
+                </div>
+            </div>
+        </section>
+
+        <div class="action-buttons">
+            <button class="generate-button">Generate</button>
+        </div>
+
+        <section class="verse-display">
+            <div class="verse-box">
+                <div class="eye-stack">
+                    <i data-lucide="chevron-up" class="stack-icon"></i>
+                    <button class="icon-button eye-icon" aria-label="Show Verse">
+                        <i data-lucide="eye"></i>
+                    </button>
+                    <i data-lucide="chevron-down" class="stack-icon"></i>
+                </div>
+                <span>أعوذ بالله من الشيطان الرجيم</span>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>© 2025 Our Quran Memoriser. All rights reserved.</p>
+    </footer>
+
+    <script>
+        lucide.createIcons();
+    </script>
+    <script src="js/app.js"></script>
+</body>
+</html>
