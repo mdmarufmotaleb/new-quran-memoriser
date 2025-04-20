@@ -5,6 +5,7 @@ const to_verse = document.getElementById('to-verse');
 const verse_span = document.querySelector('.verse-box span');
 const generate_button = document.querySelector('.generate-button');
 const eye_button = document.querySelector('.eye-icon');
+const current_verse_information = document.getElementById('verse-text');
 
 let current_verse_key;
 
@@ -128,6 +129,7 @@ generate_button.addEventListener('click', () => {
 
     current_verse_key = get_random_verse_key(`${surah_min}:${verse_min}`, `${surah_max}:${verse_max}`);
     generate_text(current_verse_key);
+    update_verse_information();
 });
 
 function generate_text(verse_key) {
@@ -165,6 +167,7 @@ up_arrow.addEventListener('click', () => {
 
     current_verse_key = `${current_surah}:${current_verse}`;
     generate_text(`${current_surah}:${current_verse}`);
+    update_verse_information();
 });
 
 down_arrow.addEventListener('click', () => {
@@ -181,4 +184,10 @@ down_arrow.addEventListener('click', () => {
     }
     current_verse_key = `${current_surah}:${current_verse}`;
     generate_text(`${current_surah}:${current_verse}`);
+    update_verse_information();
 });
+
+function update_verse_information(){
+    [current_surah, current_verse] = current_verse_key.split(":").map(Number);
+    current_verse_information.innerText = "Surah: " + current_surah + ", Verse: " + current_verse;
+}
