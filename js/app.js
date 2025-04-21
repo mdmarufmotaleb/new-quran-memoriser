@@ -195,7 +195,7 @@ function update_verse_information(){
 const surah_transliterations = {
     1: "Al-Fatiha",
     2: "Al-Baqarah",
-    3: "Aal Imran",
+    3: "Ali-Imran",
     4: "An-Nisa",
     5: "Al-Ma'idah",
     6: "Al-An'am",
