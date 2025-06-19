@@ -69,12 +69,19 @@ function extract_verse_text(data) {
 }
 
 function get_first_three_words(text) {
-    return ("... " + text.split(' ').slice(0, 3).join(' ')).replace(/۞/g, '');
+    const words = text.split(' ');
+    if (words.length <= 3) {
+        return words.join(' ').replace(/۞/g, ''); 
+    }
+    return ("... " + words.slice(0, 3).join(' ')).replace(/۞/g, '');
 }
 
 function get_last_three_words(text) {
     const words = text.split(' ');
-    return ("... " + words.slice(-3).join(' ')).replace(/۞/g, '');
+    if (words.length <= 3) {
+        return words.join(' ').replace(/۞/g, '');
+    }
+    return (words.slice(-3).join(' ') + " ...").replace(/۞/g, '');
 }
 
 function get_middle_three_words(text) {
@@ -82,13 +89,14 @@ function get_middle_three_words(text) {
     const total = words.length;
 
     if (total <= 3) {
-        return ("... " + words.join(' ')).replace(/۞/g, '');
+        return words.join(' ').replace(/۞/g, '');
     }
 
     const mid = Math.floor(total / 2);
     const start = Math.max(0, mid - 1);
-    return ("... " + words.slice(start, start + 3).join(' ')).replace(/۞/g, '');
+    return ("... " + words.slice(start, start + 3).join(' ') + " ...").replace(/۞/g, '');
 }
+
 
 from_surah.addEventListener('change', () => {
     const selected = parseInt(from_surah.value);
@@ -159,14 +167,27 @@ function generate_text(verse_key) {
             const verse_text = extract_verse_text(data);
             current_full_verse = verse_text;
             showing_full_verse = false;
-            verse_span.textContent = get_first_three_words(verse_text);
+            verse_span.textContent = get_display_text(verse_text);
         });
 }
+
+function get_display_text(text) {
+    const position = document.getElementById('display-position').value;
+
+    if (position === 'first') {
+        return get_first_three_words(text);
+    } else if (position === 'middle') {
+        return get_middle_three_words(text);
+    } else if (position === 'last') {
+        return get_last_three_words(text);
+    }
+}
+
 
 eye_button.addEventListener('click', () => {
     if (!current_full_verse) return;
     showing_full_verse = !showing_full_verse;
-    verse_span.textContent = showing_full_verse ? current_full_verse : get_first_three_words(current_full_verse);
+    verse_span.textContent = showing_full_verse ? current_full_verse : get_display_text(current_full_verse);
 });
 
 const up_arrow = document.querySelector('[data-lucide="chevron-up"]');
@@ -341,6 +362,7 @@ reset_button.addEventListener('click', () => {
     populate_verse_options(114, to_verse, 6);
     from_verse.value = 1;
     to_verse.value = 6;
+    document.getElementById('display-position').value = 'first';
 
     // Reset verse box text and label
     verse_span.textContent = 'أعوذ بالله من الشيطان الرجيم';
