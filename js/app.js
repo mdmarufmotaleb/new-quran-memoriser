@@ -72,6 +72,24 @@ function get_first_three_words(text) {
     return ("... " + text.split(' ').slice(0, 3).join(' ')).replace(/۞/g, '');
 }
 
+function get_last_three_words(text) {
+    const words = text.split(' ');
+    return ("... " + words.slice(-3).join(' ')).replace(/۞/g, '');
+}
+
+function get_middle_three_words(text) {
+    const words = text.split(' ');
+    const total = words.length;
+
+    if (total <= 3) {
+        return ("... " + words.join(' ')).replace(/۞/g, '');
+    }
+
+    const mid = Math.floor(total / 2);
+    const start = Math.max(0, mid - 1);
+    return ("... " + words.slice(start, start + 3).join(' ')).replace(/۞/g, '');
+}
+
 from_surah.addEventListener('change', () => {
     const selected = parseInt(from_surah.value);
     populate_verse_options(selected, from_verse);
@@ -118,7 +136,7 @@ document.addEventListener('DOMContentLoaded', () => {
     from_surah.value = 1;
     to_surah.value = 114;
     from_verse.value = 1;
-    to_verse.value = 7;
+    to_verse.value = 6;
 });
 
 generate_button.addEventListener('click', () => {
@@ -313,3 +331,23 @@ const surah_transliterations = {
     return surah_transliterations[number];
   }
   
+const reset_button = document.getElementById('reset-button');
+
+reset_button.addEventListener('click', () => {
+    // Reset dropdowns
+    from_surah.value = 1;
+    to_surah.value = 114;
+    populate_verse_options(1, from_verse, 1);
+    populate_verse_options(114, to_verse, 6);
+    from_verse.value = 1;
+    to_verse.value = 6;
+
+    // Reset verse box text and label
+    verse_span.textContent = 'أعوذ بالله من الشيطان الرجيم';
+    current_verse_information.textContent = 'Click Generate';
+
+    // Reset verse state
+    current_verse_key = null;
+    current_full_verse = '';
+    showing_full_verse = false;
+});
