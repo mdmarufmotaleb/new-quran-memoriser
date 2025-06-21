@@ -296,3 +296,22 @@ footer {
     align-items: center;
     margin-top: 1rem;
 }
+
+.header-buttons {
+    max-width: 600px;
+    margin: 0 auto 0.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 0.5rem;
+}
+
+.header-buttons button,
+.header-buttons select {
+    padding: 0.4rem 0.8rem;
+    font-size: 0.8rem;
+    border: 1px solid #cbb89c;
+    background-color: #f2e1c3;
+    border-radius: 6px;
+    cursor: pointer;
+}

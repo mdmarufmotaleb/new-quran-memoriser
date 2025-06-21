@@ -9,24 +9,16 @@
 </head>
 <body>
     <header style="position: relative;">
-
-    <div style="position: absolute; left: 1rem; top: 0;">
-        <button id="help-button" style="padding: 0.4rem 0.8rem; font-size: 0.8rem; border: 1px solid #cbb89c; background-color: #f2e1c3; border-radius: 6px; cursor: pointer;">
-            Help
-        </button>
-    </div>
-
-    <h1>Quran Memoriser</h1> 
-
-    <div style="position: absolute; right: 1rem; top: 0;">
-        <select id="lang-toggle" style="padding: 0.4rem 0.8rem; font-size: 0.8rem; border: 1px solid #cbb89c; background-color: #f2e1c3; border-radius: 6px; cursor: pointer;">
+    <div class="header-buttons">
+        <button id="help-button">Help</button>
+        <div style="flex: 1;"></div>
+        <select id="lang-toggle">
             <option value="en" selected>English</option>
             <option value="ar">Arabic</option>
         </select>
     </div>
+    <h1>Quran Memoriser</h1>
     </header>
-
-
 
     <main class="container">
         <section class="filters">

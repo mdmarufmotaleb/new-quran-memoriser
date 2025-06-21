@@ -235,6 +235,14 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
+    if (!localStorage.getItem('hasSeenHelp')) {
+        helpModal.style.display = 'flex';
+        currentHelpPage = 0;
+        updateHelpUI();
+        localStorage.setItem('hasSeenHelp', 'true');
+    }
+
+
 });
 
 generate_button.addEventListener('click', () => {
