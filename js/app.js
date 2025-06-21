@@ -65,8 +65,13 @@ function populate_verse_options(surah_number, target_select, default_value = 1) 
 }
 
 function extract_verse_text(data) {
-    return data.verse.text_uthmani.replace(/۞/g, '');
+    if (current_font() === "IndoPak"){
+        return data.verse.text_indopak.replace(/۞/g, '');
+    } else {
+        return data.verse.text_uthmani.replace(/۞/g, '');
+    }
 }
+    
 
 function get_first_three_words(text) {
     const words = text.split(' ');
@@ -159,8 +164,13 @@ generate_button.addEventListener('click', () => {
 });
 
 function generate_text(verse_key) {
-    const endpoint = `https://api.quran.com/api/v4/verses/by_key/${verse_key}?fields=text_uthmani`;
-
+    let endpoint;
+    if (current_font() === "IndoPak"){
+        endpoint = `https://api.quran.com/api/v4/verses/by_key/${verse_key}?fields=text_indopak`;
+    } else {
+        endpoint = `https://api.quran.com/api/v4/verses/by_key/${verse_key}?fields=text_uthmani`;
+    }
+    
     fetch(endpoint)
         .then(res => res.json())
         .then(data => {
@@ -229,6 +239,11 @@ down_arrow.addEventListener('click', () => {
 function update_verse_information(){
     [current_surah, current_verse] = current_verse_key.split(":").map(Number);
     current_verse_information.innerText = "Surah: " + getSurahTransliteration(current_surah) + " (" + current_surah + ")" + ", Verse: " + current_verse;
+}
+
+function current_font(){
+    console.log(document.getElementById('font').value);
+    return document.getElementById('font').value;
 }
 
 const surah_transliterations = {
