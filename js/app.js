@@ -150,6 +150,91 @@ document.addEventListener('DOMContentLoaded', () => {
     to_surah.value = 114;
     from_verse.value = 1;
     to_verse.value = 6;
+
+    const helpModal = document.getElementById('help-modal');
+    const helpButton = document.getElementById('help-button');
+    const closeHelp = document.getElementById('close-help');
+
+    helpButton.addEventListener('click', () => {
+        helpModal.style.display = 'flex';
+    });
+
+    closeHelp.addEventListener('click', () => {
+        helpModal.style.display = 'none';
+    });
+
+    const helpPages = [
+    `
+        <h2>Welcome</h2>
+        <p>In the name of Allah, the most Gracious, the most Merciful</p>
+        <p>Welcome to the Quran Memoriser app! This software can be used as revision for memorising the Holy Quran</p>
+        <p>For more information, use the navigation buttons below</p>
+    `,
+    `
+        <h2>How to Use</h2>
+        <ul style="padding-left: 1.2rem;">
+        <li>Select a range of Surahs and verses using the filters</li>
+        <li>Click <strong>Generate</strong> to get a new prompt</li>
+        <li>Use the <strong>eye icon</strong> to reveal the full verse</li>
+        <li>Use the <strong>arrow icons</strong> to go to the next or previous verse</li>
+        <li>Display verses from the beginning, middle, or end</li>
+        <li>Available in both Uthmani and IndoPak fonts</li>
+        </ul>
+    `,
+    `
+        <h2>Important Disclaimer</h2>
+        <p>This tool is designed for <strong>revision</strong> only. If you have not memorised the verse yet, please use a verified Mushaf instead</p>
+        <p>The display formatting is not 100% accurate - some diacritical marks or pause symbols may be missing or simplified</p>
+    `,
+    `
+        <h2>Credits & Feedback</h2>
+        <p>This app uses the <a href="https://quran.com" target="_blank" rel="noopener noreferrer">Quran.com</a> API. This is an independent project with no affiliation or partnership with them</p>
+        <p>The code is <strong>open source and free to use</strong>. No permission is needed to reuse or distribute it</p>
+        <p>UNFINISHED DO THIS BIT NECT!!11! </p>
+        <p><a href="https://github.com/your-repo-link" target="_blank">View on GitHub</a></p>
+        <p>If you have any feedback or questions, please <a href="mailto:youremail@example.com">email me</a> or <a href="https://your-google-form-link.com" target="_blank">fill out this feedback form</a>.</p>
+    `
+    ];
+
+
+    let currentHelpPage = 0;
+
+    const helpContent = document.getElementById('help-content');
+    const pageIndicator = document.getElementById('help-page-indicator');
+    const nextBtn = document.getElementById('next-help');
+    const prevBtn = document.getElementById('prev-help');
+
+    function updateHelpUI() {
+        helpContent.innerHTML = helpPages[currentHelpPage];
+        pageIndicator.textContent = `Page ${currentHelpPage + 1} of ${helpPages.length}`;
+        prevBtn.disabled = currentHelpPage === 0;
+        nextBtn.disabled = currentHelpPage === helpPages.length - 1;
+    }
+
+    helpButton.addEventListener('click', () => {
+        helpModal.style.display = 'flex';
+        currentHelpPage = 0;
+        updateHelpUI();
+    });
+
+    closeHelp.addEventListener('click', () => {
+        helpModal.style.display = 'none';
+    });
+
+    nextBtn.addEventListener('click', () => {
+        if (currentHelpPage < helpPages.length - 1) {
+            currentHelpPage++;
+            updateHelpUI();
+        }
+    });
+
+    prevBtn.addEventListener('click', () => {
+        if (currentHelpPage > 0) {
+            currentHelpPage--;
+            updateHelpUI();
+        }
+    });
+
 });
 
 generate_button.addEventListener('click', () => {
@@ -242,7 +327,6 @@ function update_verse_information(){
 }
 
 function current_font(){
-    console.log(document.getElementById('font').value);
     return document.getElementById('font').value;
 }
 
