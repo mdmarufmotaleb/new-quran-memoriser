@@ -129,13 +129,19 @@ function updateAllLangText(lang) {
     });
 
     const controlsContainer = document.querySelector('.controls-section');
-
     if (lang === 'ar') {
         controlsContainer.classList.add('rtl');
     } else {
         controlsContainer.classList.remove('rtl');
     }
 
+    document.querySelectorAll('select').forEach(select => {
+        if (lang === 'ar') {
+            select.classList.add('rtl');
+        } else {
+            select.classList.remove('rtl');
+        }
+    });
 }
 
 function get_random_verse_key(min_key, max_key) {

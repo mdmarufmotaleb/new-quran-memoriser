@@ -388,3 +388,9 @@ footer {
 .controls-section.rtl select {
     text-align: right;
 }
+
+select.rtl {
+  direction: rtl;
+  text-align: right;
+  background-position: left center;
+}
