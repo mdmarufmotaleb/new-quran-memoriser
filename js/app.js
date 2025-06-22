@@ -182,7 +182,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     `,
     `
-        <h2>Important Disclaimer</h2>
+        <h2>Disclaimer</h2>
         <p>This tool is designed for <strong>revision</strong> only. If you have not memorised the verse yet, please use a verified Mushaf instead</p>
         <p>The display formatting is <strong>not 100% accurate</strong> - some marks and pause symbols may be missing or simplified</p>
     `,
