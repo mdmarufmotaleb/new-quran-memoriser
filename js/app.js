@@ -238,7 +238,10 @@ from_verse.addEventListener('change', () => {
     const selected_from_verse = parseInt(from_verse.value);
     const selected_to_verse = parseInt(to_verse.value);
     
-    if (selected_from_verse > selected_to_verse) {
+    const selected_from_surah = parseInt(from_surah.value);
+    const selected_to_surah = parseInt(to_surah.value);
+
+    if (selected_from_verse > selected_to_verse && selected_from_surah == selected_to_surah) {
         to_verse.value = selected_from_verse;
     }
 
@@ -248,7 +251,10 @@ to_verse.addEventListener('change', () => {
     const selected_from_verse = parseInt(from_verse.value);
     const selected_to_verse = parseInt(to_verse.value);
     
-    if (selected_to_verse < selected_from_verse) {
+    const selected_from_surah = parseInt(from_surah.value);
+    const selected_to_surah = parseInt(to_surah.value);
+
+    if (selected_to_verse < selected_from_verse && selected_from_surah == selected_to_surah) {
         from_verse.value = selected_to_verse;
     }
 
