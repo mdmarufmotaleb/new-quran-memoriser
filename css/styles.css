@@ -368,3 +368,13 @@ footer {
     padding: 0 1rem;
 }
 
+.help-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+}
+
+.help-nav.rtl {
+    flex-direction: row-reverse;
+}

@@ -379,7 +379,6 @@ document.addEventListener('DOMContentLoaded', () => {
         prevBtn.textContent = translations[lang].back;
         nextBtn.textContent = translations[lang].next;
 
-
         helpContent.style.direction = lang === 'ar' ? 'rtl' : 'ltr';
         helpContent.style.textAlign = lang === 'ar' ? 'right' : 'left';
 
@@ -395,6 +394,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
         prevBtn.disabled = currentHelpPage === 0;
         nextBtn.disabled = currentHelpPage === helpPages.length - 1;
+    
+        const navContainer = document.querySelector('.help-nav');
+        if (lang === 'ar') {
+            navContainer.classList.add('rtl');
+        } else {
+            navContainer.classList.remove('rtl');
+        }
+
     }
 
     helpButton.addEventListener('click', () => {
