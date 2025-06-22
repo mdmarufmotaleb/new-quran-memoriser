@@ -346,10 +346,20 @@ footer {
 footer {
   background-color: #f5ecd9;
   padding: 1rem 0;
-  margin-top: 1rem;
+  margin-top: auto;
   text-align: center;
   border-top: none;
 }
+
+.footer-inner {
+  max-width: 900px;
+  margin: 0 auto;
+  padding-top: 1rem;
+  font-size: 0.9rem;
+  color: #7c6a52;
+  border-top: 1px solid #e2d6bf;
+}
+
 
 .content-width {
     max-width: 900px;
