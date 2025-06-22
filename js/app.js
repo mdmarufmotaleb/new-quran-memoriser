@@ -219,6 +219,8 @@ from_surah.addEventListener('change', () => {
         to_surah.value = selected;
         populate_verse_options(parseInt(to_surah.value), to_verse, langToggle.value, verse_counts[selected]);
     }
+
+    remember_choices();
 });
 
 to_surah.addEventListener('change', () => {
@@ -230,6 +232,8 @@ to_surah.addEventListener('change', () => {
         from_surah.value = selected;
         populate_verse_options(parseInt(from_surah.value), from_verse, langToggle.value, 1);
     }
+
+    remember_choices();
 });
 
 from_verse.addEventListener('change', () => {
@@ -239,6 +243,8 @@ from_verse.addEventListener('change', () => {
     if (selected_from_verse > selected_to_verse) {
         to_verse.value = selected_from_verse;
     }
+
+    remember_choices();
 });
 
 to_verse.addEventListener('change', () => {
@@ -248,13 +254,15 @@ to_verse.addEventListener('change', () => {
     if (selected_to_verse < selected_from_verse) {
         from_verse.value = selected_to_verse;
     }
+
+    remember_choices();
 });
 
 document.addEventListener('DOMContentLoaded', () => {
     const savedLang = localStorage.getItem('preferredLanguage');
     const lang = savedLang || langToggle.value;
     const languageModal = document.getElementById('language-modal');
-    
+
     const helpPagesEn = [
     `
         <h2>Welcome</h2>
@@ -315,6 +323,8 @@ document.addEventListener('DOMContentLoaded', () => {
             <p>إذا كان لديك أي ملاحظات أو استفسارات، راسلنا على <a href="mailto:myquran.memoriser@gmail.com">myquran.memoriser@gmail.com</a> أو املأ <a href="https://docs.google.com/forms/d/e/1FAIpQLSfiOgNpEDIoWwFnGzohwuaeFvd2Oo5A6wullGkAifNoke-6Cw/viewform?usp=header" target="_blank">هذا</a> النموذج</p>
         `
     ];
+
+    loadSavedDropdownValues();
 
     let helpPages = lang === 'ar' ? helpPagesAr : helpPagesEn;
 
@@ -449,17 +459,7 @@ document.addEventListener('DOMContentLoaded', () => {
         showHelpModalIfNeeded();
     });
 
-
-    const dropdownIds = ['from-surah', 'from-verse', 'to-surah', 'to-verse', 'display-position', 'font'];
-
-    dropdownIds.forEach(id => {
-        const dropdown = document.getElementById(id);
-        const saved = localStorage.getItem(id);
-        if (saved) dropdown.value = saved;
-        dropdown.addEventListener('change', () => {
-            localStorage.setItem(id, dropdown.value);
-        });
-    });
+    remember_choices();
 
     langToggle.addEventListener('change', () => {
         localStorage.setItem('preferredLanguage', langToggle.value);
@@ -474,9 +474,31 @@ document.addEventListener('DOMContentLoaded', () => {
         populate_verse_options(parseInt(to_surah.value), to_verse, lang, parseInt(to_verse.value));
     });
 
-
-
 });
+
+function loadSavedDropdownValues() {
+    const dropdownIds = ['from-surah', 'from-verse', 'to-surah', 'to-verse', 'display-position', 'font'];
+
+    dropdownIds.forEach(id => {
+        const dropdown = document.getElementById(id);
+        const saved = localStorage.getItem(id);
+        if (saved && dropdown) dropdown.value = saved;
+    });
+}
+
+function remember_choices() {
+    const dropdownIds = ['from-surah', 'from-verse', 'to-surah', 'to-verse', 'display-position', 'font'];
+
+    dropdownIds.forEach(id => {
+        const dropdown = document.getElementById(id);
+        if (!dropdown) return;
+        dropdown.removeEventListener('change', dropdown._listener); // clear old
+        const handler = () => localStorage.setItem(id, dropdown.value);
+        dropdown._listener = handler;
+        dropdown.addEventListener('change', handler);
+    });
+}
+
 
 generate_button.addEventListener('click', () => {
     const surah_min = from_surah.value;
@@ -487,6 +509,7 @@ generate_button.addEventListener('click', () => {
     current_verse_key = get_random_verse_key(`${surah_min}:${verse_min}`, `${surah_max}:${verse_max}`);
     generate_text(current_verse_key);
     update_verse_information();
+    remember_choices();
 });
 
 function generate_text(verse_key) {
