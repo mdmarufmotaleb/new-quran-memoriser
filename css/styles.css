@@ -321,7 +321,7 @@ footer {
         display: flex;
         flex-wrap: wrap;
         justify-content: center;
-        gap: 1.5rem; /* Responsive spacing */
+        gap: 1.5rem;
         margin: 0 auto;
         padding: 0.5rem;
     }
@@ -329,7 +329,7 @@ footer {
     .header-buttons button,
     .header-buttons select {
         flex: 1 1 auto;
-        max-width: 140px; /* prevents them from being too wide */
+        max-width: 100px;
     }
 }
 
