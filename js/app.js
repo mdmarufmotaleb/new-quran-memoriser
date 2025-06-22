@@ -127,6 +127,15 @@ function updateAllLangText(lang) {
             el.innerHTML = translations[lang][key];
         }
     });
+
+    const controlsContainer = document.querySelector('.controls-section');
+
+    if (lang === 'ar') {
+        controlsContainer.classList.add('rtl');
+    } else {
+        controlsContainer.classList.remove('rtl');
+    }
+
 }
 
 function get_random_verse_key(min_key, max_key) {

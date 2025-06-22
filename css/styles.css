@@ -378,3 +378,13 @@ footer {
 .help-nav.rtl {
     flex-direction: row-reverse;
 }
+
+.controls-section.rtl {
+    direction: rtl;
+    text-align: right;
+}
+
+.controls-section.rtl label,
+.controls-section.rtl select {
+    text-align: right;
+}
