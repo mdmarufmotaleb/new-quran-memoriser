@@ -167,32 +167,31 @@ document.addEventListener('DOMContentLoaded', () => {
     `
         <h2>Welcome</h2>
         <p>In the name of Allah, the most Gracious, the most Merciful</p>
-        <p>Welcome to the Quran Memoriser app! This software can be used as revision for memorising the Holy Quran</p>
-        <p>For more information, use the navigation buttons below</p>
+        <p>Welcome to the <strong>MyQuran Memoriser</strong> app! This tool can be used as revision for memorising the Holy Quran</p>
+        <p>For more information, use the <strong>navigation</strong> buttons below</p>
     `,
     `
         <h2>How to Use</h2>
         <ul style="padding-left: 1.2rem;">
-        <li>Select a range of Surahs and verses using the filters</li>
-        <li>Click <strong>Generate</strong> to get a new prompt</li>
-        <li>Use the <strong>eye icon</strong> to reveal the full verse</li>
-        <li>Use the <strong>arrow icons</strong> to go to the next or previous verse</li>
-        <li>Display verses from the beginning, middle, or end</li>
-        <li>Available in both Uthmani and IndoPak fonts</li>
+        <li>Pick a Surah and verse range</li>
+        <li>Click <strong>Generate</strong> for a new verse</li>
+        <li>Use the <strong>eye icon</strong> to show the full verse</li>
+        <li>Display 3 consecutive words anywhere from that verse</li>
+        <li>Choose between <strong>Uthmani</strong> and <strong>IndoPak</strong> fonts</li>
         </ul>
+
     `,
     `
         <h2>Important Disclaimer</h2>
         <p>This tool is designed for <strong>revision</strong> only. If you have not memorised the verse yet, please use a verified Mushaf instead</p>
-        <p>The display formatting is not 100% accurate - some diacritical marks or pause symbols may be missing or simplified</p>
+        <p>The display formatting is <strong>not 100% accurate</strong> - some marks and pause symbols may be missing or simplified</p>
     `,
     `
         <h2>Credits & Feedback</h2>
         <p>This app uses the <a href="https://quran.com" target="_blank" rel="noopener noreferrer">Quran.com</a> API. This is an independent project with no affiliation or partnership with them</p>
         <p>The code is <strong>open source and free to use</strong>. No permission is needed to reuse or distribute it</p>
-        <p>UNFINISHED DO THIS BIT NECT!!11! </p>
-        <p><a href="https://github.com/your-repo-link" target="_blank">View on GitHub</a></p>
-        <p>If you have any feedback or questions, please <a href="mailto:youremail@example.com">email me</a> or <a href="https://your-google-form-link.com" target="_blank">fill out this feedback form</a>.</p>
+        <p><a href="https://github.com/MyQuran-Memoriser/MyQuran-Memoriser/" target="_blank">View on GitHub</a></p>
+        <p>If you have any feedback or questions, please email us on <a href="mailto:myquran.memoriser@gmail.com">myquran.memoriser@gmail.com</a> or fill out <a href="https://docs.google.com/forms/d/e/1FAIpQLScKbGKVcs3rhurmX5SU9FpENuiUEiSESqUGgVm-Xr2uqaPJ2w/viewform?usp=header" target="_blank">this</a> Google feedback form.</p>
     `
     ];
 
