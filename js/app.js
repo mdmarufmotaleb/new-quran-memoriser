@@ -337,7 +337,7 @@ document.addEventListener('DOMContentLoaded', () => {
     from_surah.value = 1;
     to_surah.value = 114;
     from_verse.value = 1;
-    to_verse.value = 6;
+    to_verse.value = 7;
 
     const helpModal = document.getElementById('help-modal');
     const helpButton = document.getElementById('help-button');
