@@ -234,13 +234,57 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    if (!localStorage.getItem('hasSeenHelp')) {
-        helpModal.style.display = 'flex';
-        currentHelpPage = 0;
-        updateHelpUI();
-        localStorage.setItem('hasSeenHelp', 'true');
+    const langToggle = document.getElementById('lang-toggle');
+    const languageModal = document.getElementById('language-modal');
+    const selectEn = document.getElementById('select-en');
+    const selectAr = document.getElementById('select-ar');
+
+    function showHelpModalIfNeeded() {
+        if (!localStorage.getItem('hasSeenHelp')) {
+            helpModal.style.display = 'flex';
+            currentHelpPage = 0;
+            updateHelpUI();
+            localStorage.setItem('hasSeenHelp', 'true');
+        }
     }
 
+    const savedLang = localStorage.getItem('preferredLanguage');
+    if (savedLang) {
+        langToggle.value = savedLang;
+        showHelpModalIfNeeded();
+    } else {
+        languageModal.style.display = 'flex';
+    }
+
+    selectEn.addEventListener('click', () => {
+        langToggle.value = 'en';
+        localStorage.setItem('preferredLanguage', 'en');
+        languageModal.style.display = 'none';
+        showHelpModalIfNeeded();
+    });
+
+    selectAr.addEventListener('click', () => {
+        langToggle.value = 'ar';
+        localStorage.setItem('preferredLanguage', 'ar');
+        languageModal.style.display = 'none';
+        showHelpModalIfNeeded();
+    });
+
+    langToggle.addEventListener('change', () => {
+        localStorage.setItem('preferredLanguage', langToggle.value);
+    });
+
+
+    const dropdownIds = ['from-surah', 'from-verse', 'to-surah', 'to-verse', 'display-position', 'font'];
+
+    dropdownIds.forEach(id => {
+        const dropdown = document.getElementById(id);
+        const saved = localStorage.getItem(id);
+        if (saved) dropdown.value = saved;
+        dropdown.addEventListener('change', () => {
+            localStorage.setItem(id, dropdown.value);
+        });
+    });
 
 });
 
@@ -461,7 +505,7 @@ const surah_transliterations = {
 const reset_button = document.getElementById('reset-button');
 
 reset_button.addEventListener('click', () => {
-    // Reset dropdowns
+
     from_surah.value = 1;
     to_surah.value = 114;
     populate_verse_options(1, from_verse, 1);
@@ -470,11 +514,9 @@ reset_button.addEventListener('click', () => {
     to_verse.value = 6;
     document.getElementById('display-position').value = 'first';
 
-    // Reset verse box text and label
     verse_span.textContent = 'أعوذ بالله من الشيطان الرجيم';
     current_verse_information.textContent = 'Click Generate';
 
-    // Reset verse state
     current_verse_key = null;
     current_full_verse = '';
     showing_full_verse = false;
