@@ -312,7 +312,7 @@ document.addEventListener('DOMContentLoaded', () => {
             <p>يستخدم هذا التطبيق واجهة برمجة التطبيقات من <a href="https://quran.com" target="_blank" rel="noopener noreferrer">Quran.com</a>. هذا مشروع مستقل وغير مرتبط بهم رسميًا</p>
             <p>الكود <strong>مفتوح المصدر ومجاني للاستخدام</strong>. لا تحتاج إلى إذن لإعادة استخدامه أو توزيعه</p>
             <p><a href="https://github.com/MyQuran-Memoriser/MyQuran-Memoriser/" target="_blank">عرض على GitHub</a></p>
-            <p>إذا كان لديك أي ملاحظات أو استفسارات، راسلنا على <a href="mailto:myquran.memoriser@gmail.com">myquran.memoriser@gmail.com</a> أو املأ <a href="https://docs.google.com/forms/d/e/1FAIpQLScKbGKVcs3rhurmX5SU9FpENuiUEiSESqUGgVm-Xr2uqaPJ2w/viewform?usp=header" target="_blank">هذا</a> النموذج</p>
+            <p>إذا كان لديك أي ملاحظات أو استفسارات، راسلنا على <a href="mailto:myquran.memoriser@gmail.com">myquran.memoriser@gmail.com</a> أو املأ <a href="https://docs.google.com/forms/d/e/1FAIpQLSfiOgNpEDIoWwFnGzohwuaeFvd2Oo5A6wullGkAifNoke-6Cw/viewform?usp=header" target="_blank">هذا</a> النموذج</p>
         `
     ];
 
