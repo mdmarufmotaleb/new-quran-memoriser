@@ -191,7 +191,7 @@ document.addEventListener('DOMContentLoaded', () => {
         <p>This app uses the <a href="https://quran.com" target="_blank" rel="noopener noreferrer">Quran.com</a> API. This is an independent project with no affiliation or partnership with them</p>
         <p>The code is <strong>open source and free to use</strong>. No permission is needed to reuse or distribute it</p>
         <p><a href="https://github.com/MyQuran-Memoriser/MyQuran-Memoriser/" target="_blank">View on GitHub</a></p>
-        <p>If you have any feedback or questions, please email us on <a href="mailto:myquran.memoriser@gmail.com">myquran.memoriser@gmail.com</a> or fill out <a href="https://docs.google.com/forms/d/e/1FAIpQLScKbGKVcs3rhurmX5SU9FpENuiUEiSESqUGgVm-Xr2uqaPJ2w/viewform?usp=header" target="_blank">this</a> Google feedback form.</p>
+        <p>If you have any feedback or questions, please email us on <a href="mailto:myquran.memoriser@gmail.com">myquran.memoriser@gmail.com</a> or fill out <a href="https://docs.google.com/forms/d/e/1FAIpQLScKbGKVcs3rhurmX5SU9FpENuiUEiSESqUGgVm-Xr2uqaPJ2w/viewform?usp=header" target="_blank">this</a> Google feedback form</p>
     `
     ];
 
