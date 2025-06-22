@@ -6,6 +6,7 @@ const verse_span = document.querySelector('.verse-box span');
 const generate_button = document.querySelector('.generate-button');
 const eye_button = document.querySelector('.eye-icon');
 const current_verse_information = document.getElementById('verse-text');
+const langToggle = document.getElementById('lang-toggle');
 
 let current_verse_key;
 
@@ -31,6 +32,103 @@ const verse_counts = {
     106: 4, 107: 7, 108: 3, 109: 6, 110: 3, 111: 5, 112: 4, 113: 5, 114: 6
 };
 
+const surahNames = {
+  en: [
+    "The Opening", "The Cow", "The Family of Imran", "The Women", "The Table Spread", "The Cattle", "The Heights", "The Spoils of War", "The Repentance", "Jonah",
+    "Hud", "Joseph", "The Thunder", "Abraham", "The Rocky Tract", "The Bee", "The Night Journey", "The Cave", "Mary", "Ta-Ha", "The Prophets", "The Pilgrimage",
+    "The Believers", "The Light", "The Criterion", "The Poets", "The Ant", "The Stories", "The Spider", "The Romans", "Luqman", "The Prostration", "The Confederates",
+    "Sheba", "The Originator", "Ya-Sin", "Those who set the Ranks", "Sad", "The Groups", "The Forgiver", "Explained in Detail", "The Consultation", "The Gold Adornments",
+    "The Smoke", "The Crouching", "The Wind-Curved Sandhills", "Muhammad", "The Victory", "The Rooms", "Qaf", "The Winnowing Winds", "The Mount", "The Star",
+    "The Moon", "The Most Merciful", "The Inevitable", "The Iron", "The Pleading Woman", "The Exile", "She that is to be examined", "The Ranks", "The Congregation",
+    "The Hypocrites", "Mutual Disillusion", "The Divorce", "The Prohibition", "The Sovereignty", "The Pen", "The Reality", "The Ascending Stairways", "Noah",
+    "The Jinn", "The Enshrouded One", "The Cloaked One", "The Resurrection", "Man", "The Emissaries", "The Tidings", "Those who drag forth", "He Frowned",
+    "The Overthrowing", "The Cleaving", "Defrauding", "The Splitting Open", "The Mansions of the Stars", "The Morning Star", "The Most High", "The Overwhelming",
+    "The Dawn", "The City", "The Sun", "The Night", "The Morning Hours", "The Relief", "The Fig", "The Clot", "The Power", "The Clear Proof", "The Earthquake",
+    "The Courser", "The Striking Calamity", "The Emulous Desire", "The Declining Day", "The Slanderer", "The Elephant", "Quraysh", "The Small Kindnesses",
+    "Abundance", "The Disbelievers", "The Divine Support", "The Palm Fibre", "Sincerity", "The Daybreak", "Mankind"
+  ],
+  ar: [
+    "الفاتحة", "البقرة", "آل عمران", "النساء", "المائدة", "الأنعام", "الأعراف", "الأنفال", "التوبة", "يونس", "هود", "يوسف", "الرعد", "إبراهيم", "الحجر",
+    "النحل", "الإسراء", "الكهف", "مريم", "طه", "الأنبياء", "الحج", "المؤمنون", "النور", "الفرقان", "الشعراء", "النمل", "القصص", "العنكبوت", "الروم",
+    "لقمان", "السجدة", "الأحزاب", "سبأ", "فاطر", "يس", "الصافات", "ص", "الزمر", "غافر", "فصلت", "الشورى", "الزخرف", "الدخان", "الجاثية", "الأحقاف",
+    "محمد", "الفتح", "الحجرات", "ق", "الذاريات", "الطور", "النجم", "القمر", "الرحمن", "الواقعة", "الحديد", "المجادلة", "الحشر", "الممتحنة", "الصف",
+    "الجمعة", "المنافقون", "التغابن", "الطلاق", "التحريم", "الملك", "القلم", "الحاقة", "المعارج", "نوح", "الجن", "المزمل", "المدثر", "القيامة",
+    "الإنسان", "المرسلات", "النبأ", "النازعات", "عبس", "التكوير", "الإنفطار", "المطففين", "الإنشقاق", "البروج", "الطارق", "الأعلى", "الغاشية",
+    "الفجر", "البلد", "الشمس", "الليل", "الضحى", "الشرح", "التين", "العلق", "القدر", "البينة", "الزلزلة", "العاديات", "القارعة", "التكاثر",
+    "العصر", "الهمزة", "الفيل", "قريش", "الماعون", "الكوثر", "الكافرون", "النصر", "المسد", "الإخلاص", "الفلق", "الناس"
+  ]
+};
+
+function toArabicNumerals(number) {
+    return number.toString().replace(/\d/g, d => "٠١٢٣٤٥٦٧٨٩"[d]);
+}
+
+function updateSurahDropdowns(lang) {
+    const fromSurah = document.getElementById('from-surah');
+    const toSurah = document.getElementById('to-surah');
+
+    [fromSurah, toSurah].forEach(select => {
+        const selectedValue = select.value;
+        select.innerHTML = "";
+        for (let i = 0; i < 114; i++) {
+            const option = document.createElement("option");
+            const number = lang === "ar" ? toArabicNumerals(i + 1) : (i + 1);
+            const name = surahNames[lang][i];
+            option.value = i + 1;
+            option.textContent = lang === "ar" ? `${number} ${name}` : `${number}. ${name}`;
+            select.appendChild(option);
+        }
+        select.value = selectedValue;
+    });
+}
+
+const translations = {
+    en: {
+        help: 'Help',
+        powered_by: 'Powered by <a href="https://www.quran.com" target="_blank" rel="noopener noreferrer">Quran.com</a>. Not affiliated',
+        generate: "Generate",
+        select_from: "Select from:",
+        select_to: "Select to:",
+        display_verse: "Display verse:",
+        surah_verse: "Surah: ..., Verse: ...",
+        from_beginning: "From beginning",
+        from_middle: "From middle",
+        from_end: "From end",
+        uthmani: "Uthmani Font",
+        indopak: "IndoPak Font",
+        page_of: "Page {x} of {y}",
+        back: "Back",
+        next: "Next",
+    },
+    ar: {
+        help: 'مساعدة',
+        powered_by: 'مدعوم من <a href="https://www.quran.com" target="_blank" rel="noopener noreferrer">Quran.com</a>. لا توجد علاقة رسمية',
+        generate: "عرض",
+        select_from: "اختر من:",
+        select_to: "اختر إلى:",
+        display_verse: "عرض الآية:",
+        surah_verse: "الآية ...، سورة ...",
+        from_beginning: "من البداية",
+        from_middle: "من الوسط",
+        from_end: "من النهاية",
+        uthmani: "خط عثماني",
+        indopak: "خط إندوباك",
+        page_of: "الصفحة {x} من {y}",
+        back: "رجوع",
+        next: "التالي",
+    }
+};
+
+
+function updateAllLangText(lang) {
+    document.querySelectorAll('.lang-text').forEach(el => {
+        const key = el.dataset.key;
+        if (translations[lang][key]) {
+            el.innerHTML = translations[lang][key];
+        }
+    });
+}
+
 function get_random_verse_key(min_key, max_key) {
     const [min_surah, min_verse] = min_key.split(':').map(Number);
     const [max_surah, max_verse] = max_key.split(':').map(Number);
@@ -50,19 +148,29 @@ function get_random_verse_key(min_key, max_key) {
     return valid_keys[random_index];
 }
 
-function populate_verse_options(surah_number, target_select, default_value = 1) {
+function populate_verse_options(surah_number, target_select, lang = 'en', default_value = 1) {
     const total_verses = verse_counts[surah_number];
     target_select.innerHTML = '';
+
     for (let i = 1; i <= total_verses; i++) {
         const option = document.createElement('option');
         option.value = i;
-        option.textContent = `Verse ${i}`;
+
+        if (lang === 'ar') {
+            const arabicNum = toArabicNumerals(i);
+            option.textContent = `${arabicNum} الآية`;
+        } else {
+            option.textContent = `Verse ${i}`;
+        }
+
         if (i === default_value) {
             option.selected = true;
         }
+
         target_select.appendChild(option);
     }
 }
+
 
 function extract_verse_text(data) {
     if (current_font() === "IndoPak"){
@@ -105,22 +213,22 @@ function get_middle_three_words(text) {
 
 from_surah.addEventListener('change', () => {
     const selected = parseInt(from_surah.value);
-    populate_verse_options(selected, from_verse);
+    populate_verse_options(selected, from_verse, langToggle.value);
     
     if (selected > parseInt(to_surah.value)) {
         to_surah.value = selected;
-        populate_verse_options(parseInt(to_surah.value), to_verse, verse_counts[selected]);
+        populate_verse_options(parseInt(to_surah.value), to_verse, langToggle.value, verse_counts[selected]);
     }
 });
 
 to_surah.addEventListener('change', () => {
     const selected = parseInt(to_surah.value);
     const last_verse = verse_counts[selected];
-    populate_verse_options(selected, to_verse, last_verse);
+    populate_verse_options(selected, to_verse, langToggle.value, last_verse);
     
     if (selected < parseInt(from_surah.value)) {
         from_surah.value = selected;
-        populate_verse_options(parseInt(from_surah.value), from_verse, 1);
+        populate_verse_options(parseInt(from_surah.value), from_verse, langToggle.value, 1);
     }
 });
 
@@ -143,8 +251,84 @@ to_verse.addEventListener('change', () => {
 });
 
 document.addEventListener('DOMContentLoaded', () => {
-    populate_verse_options(parseInt(from_surah.value), from_verse, 1);
-    populate_verse_options(parseInt(to_surah.value), to_verse, verse_counts[114]);
+    const savedLang = localStorage.getItem('preferredLanguage');
+    const lang = savedLang || langToggle.value;
+    const languageModal = document.getElementById('language-modal');
+    
+    const helpPagesEn = [
+    `
+        <h2>Welcome</h2>
+        <p>In the name of Allah, the most Gracious, the most Merciful</p>
+        <p>Welcome to the <strong>MyQuran Memoriser</strong> app! This tool can be used as revision for memorising the Holy Quran</p>
+        <p>For more information, use the <strong>navigation</strong> buttons below</p>
+    `,
+    `
+        <h2>How to Use</h2>
+        <ul style="padding-left: 1.2rem;">
+        <li>Pick a Surah and verse range</li>
+        <li>Click <strong>Generate</strong> for a new verse</li>
+        <li>Use the <strong>eye icon</strong> to show the full verse</li>
+        <li>Display 3 consecutive words anywhere from that verse</li>
+        <li>Choose between <strong>Uthmani</strong> and <strong>IndoPak</strong> fonts</li>
+        </ul>
+    `,
+    `
+        <h2>Disclaimer</h2>
+        <p>This tool is designed for <strong>revision</strong> only. If you have not memorised the verse yet, please use a verified Mushaf instead</p>
+        <p>The display formatting is <strong>not 100% accurate</strong> - some marks and pause symbols may be missing or simplified</p>
+    `,
+    `
+        <h2>Credits & Feedback</h2>
+        <p>This app uses the <a href="https://quran.com" target="_blank" rel="noopener noreferrer">Quran.com</a> API. This is an independent project with no affiliation or partnership with them</p>
+        <p>The code is <strong>open source and free to use</strong>. No permission is needed to reuse or distribute it</p>
+        <p><a href="https://github.com/MyQuran-Memoriser/MyQuran-Memoriser/" target="_blank">View on GitHub</a></p>
+        <p>If you have any feedback or questions, please email us on <a href="mailto:myquran.memoriser@gmail.com">myquran.memoriser@gmail.com</a> or fill out <a href="https://docs.google.com/forms/d/e/1FAIpQLScKbGKVcs3rhurmX5SU9FpENuiUEiSESqUGgVm-Xr2uqaPJ2w/viewform?usp=header" target="_blank">this</a> Google feedback form</p>
+    `
+    ];
+    const helpPagesAr = [
+        `
+            <h2>مرحبًا</h2>
+            <p>بسم الله الرحمن الرحيم</p>
+            <p>مرحبًا بك في تطبيق <strong>MyQuran Memoriser</strong>! يمكن استخدام هذه الأداة كمراجعة لحفظ القرآن الكريم</p>
+            <p>لمزيد من المعلومات، استخدم أزرار <strong>التنقل</strong> أدناه</p>
+        `,
+        `
+            <h2>كيفية الاستخدام</h2>
+            <ul style="padding-right: 1.2rem; text-align: right;">
+            <li>اختر السورة ونطاق الآيات</li>
+            <li>انقر على <strong>عرض</strong> للحصول على آية جديدة</li>
+            <li>استخدم <strong>رمز العين</strong> لإظهار الآية الكاملة</li>
+            <li>اعرض ثلاث كلمات متتالية من الآية</li>
+            <li>اختر بين خط <strong>عثماني</strong> أو <strong>إندوباك</strong></li>
+            </ul>
+        `,
+        `
+            <h2>تنبيه</h2>
+            <p>هذه الأداة مخصصة لـ <strong>المراجعة</strong> فقط. إذا لم تكن قد حفظت الآية بعد، يرجى استخدام مصحف موثوق بدلاً من ذلك</p>
+            <p>تنسيق العرض <strong>ليس ٪١٠٠ </strong> - قد تكون بعض العلامات والرموز مفقودة أو مبسطة</p>
+        `,
+        `
+            <h2>الشكر والتعليقات</h2>
+            <p>يستخدم هذا التطبيق واجهة برمجة التطبيقات من <a href="https://quran.com" target="_blank" rel="noopener noreferrer">Quran.com</a>. هذا مشروع مستقل وغير مرتبط بهم رسميًا</p>
+            <p>الكود <strong>مفتوح المصدر ومجاني للاستخدام</strong>. لا تحتاج إلى إذن لإعادة استخدامه أو توزيعه</p>
+            <p><a href="https://github.com/MyQuran-Memoriser/MyQuran-Memoriser/" target="_blank">عرض على GitHub</a></p>
+            <p>إذا كان لديك أي ملاحظات أو استفسارات، راسلنا على <a href="mailto:myquran.memoriser@gmail.com">myquran.memoriser@gmail.com</a> أو املأ <a href="https://docs.google.com/forms/d/e/1FAIpQLScKbGKVcs3rhurmX5SU9FpENuiUEiSESqUGgVm-Xr2uqaPJ2w/viewform?usp=header" target="_blank">هذا</a> النموذج</p>
+        `
+    ];
+
+    let helpPages = lang === 'ar' ? helpPagesAr : helpPagesEn;
+
+    if (savedLang) {
+        langToggle.value = savedLang;
+        updateAllLangText(lang);
+        updateSurahDropdowns(lang);
+        showHelpModalIfNeeded();
+    } else {
+        languageModal.style.display = 'flex';
+    }
+
+    populate_verse_options(parseInt(from_surah.value), from_verse, lang, parseInt(from_verse.value));
+    populate_verse_options(parseInt(to_surah.value), to_verse, lang, parseInt(to_verse.value));
 
     from_surah.value = 1;
     to_surah.value = 114;
@@ -163,39 +347,6 @@ document.addEventListener('DOMContentLoaded', () => {
         helpModal.style.display = 'none';
     });
 
-    const helpPages = [
-    `
-        <h2>Welcome</h2>
-        <p>In the name of Allah, the most Gracious, the most Merciful</p>
-        <p>Welcome to the <strong>MyQuran Memoriser</strong> app! This tool can be used as revision for memorising the Holy Quran</p>
-        <p>For more information, use the <strong>navigation</strong> buttons below</p>
-    `,
-    `
-        <h2>How to Use</h2>
-        <ul style="padding-left: 1.2rem;">
-        <li>Pick a Surah and verse range</li>
-        <li>Click <strong>Generate</strong> for a new verse</li>
-        <li>Use the <strong>eye icon</strong> to show the full verse</li>
-        <li>Display 3 consecutive words anywhere from that verse</li>
-        <li>Choose between <strong>Uthmani</strong> and <strong>IndoPak</strong> fonts</li>
-        </ul>
-
-    `,
-    `
-        <h2>Disclaimer</h2>
-        <p>This tool is designed for <strong>revision</strong> only. If you have not memorised the verse yet, please use a verified Mushaf instead</p>
-        <p>The display formatting is <strong>not 100% accurate</strong> - some marks and pause symbols may be missing or simplified</p>
-    `,
-    `
-        <h2>Credits & Feedback</h2>
-        <p>This app uses the <a href="https://quran.com" target="_blank" rel="noopener noreferrer">Quran.com</a> API. This is an independent project with no affiliation or partnership with them</p>
-        <p>The code is <strong>open source and free to use</strong>. No permission is needed to reuse or distribute it</p>
-        <p><a href="https://github.com/MyQuran-Memoriser/MyQuran-Memoriser/" target="_blank">View on GitHub</a></p>
-        <p>If you have any feedback or questions, please email us on <a href="mailto:myquran.memoriser@gmail.com">myquran.memoriser@gmail.com</a> or fill out <a href="https://docs.google.com/forms/d/e/1FAIpQLScKbGKVcs3rhurmX5SU9FpENuiUEiSESqUGgVm-Xr2uqaPJ2w/viewform?usp=header" target="_blank">this</a> Google feedback form</p>
-    `
-    ];
-
-
     let currentHelpPage = 0;
 
     const helpContent = document.getElementById('help-content');
@@ -205,7 +356,30 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function updateHelpUI() {
         helpContent.innerHTML = helpPages[currentHelpPage];
-        pageIndicator.textContent = `Page ${currentHelpPage + 1} of ${helpPages.length}`;
+        const lang = langToggle.value;
+        const pageText = translations[lang].page_of
+            .replace("{x}", lang === 'ar' ? toArabicNumerals(currentHelpPage + 1) : currentHelpPage + 1)
+            .replace("{y}", lang === 'ar' ? toArabicNumerals(helpPages.length) : helpPages.length);
+
+        pageIndicator.textContent = pageText;
+
+        prevBtn.textContent = translations[lang].back;
+        nextBtn.textContent = translations[lang].next;
+
+
+        helpContent.style.direction = lang === 'ar' ? 'rtl' : 'ltr';
+        helpContent.style.textAlign = lang === 'ar' ? 'right' : 'left';
+
+        const closeHelpBtn = document.getElementById('close-help');
+
+        if (lang === 'ar') {
+            closeHelpBtn.style.left = '1rem';
+            closeHelpBtn.style.right = 'auto';
+        } else {
+            closeHelpBtn.style.left = 'auto';
+            closeHelpBtn.style.right = '1rem';
+        }
+
         prevBtn.disabled = currentHelpPage === 0;
         nextBtn.disabled = currentHelpPage === helpPages.length - 1;
     }
@@ -234,8 +408,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    const langToggle = document.getElementById('lang-toggle');
-    const languageModal = document.getElementById('language-modal');
     const selectEn = document.getElementById('select-en');
     const selectAr = document.getElementById('select-ar');
 
@@ -248,30 +420,33 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    const savedLang = localStorage.getItem('preferredLanguage');
-    if (savedLang) {
-        langToggle.value = savedLang;
-        showHelpModalIfNeeded();
-    } else {
-        languageModal.style.display = 'flex';
-    }
-
     selectEn.addEventListener('click', () => {
         langToggle.value = 'en';
         localStorage.setItem('preferredLanguage', 'en');
         languageModal.style.display = 'none';
+        helpPages = helpPagesEn;
+
+        updateAllLangText('en');
+        updateSurahDropdowns('en');
+        populate_verse_options(parseInt(from_surah.value), from_verse, 'en', parseInt(from_verse.value));
+        populate_verse_options(parseInt(to_surah.value), to_verse, 'en', parseInt(to_verse.value));
+
         showHelpModalIfNeeded();
     });
+
 
     selectAr.addEventListener('click', () => {
         langToggle.value = 'ar';
         localStorage.setItem('preferredLanguage', 'ar');
         languageModal.style.display = 'none';
-        showHelpModalIfNeeded();
-    });
+        helpPages = helpPagesAr;
 
-    langToggle.addEventListener('change', () => {
-        localStorage.setItem('preferredLanguage', langToggle.value);
+        updateAllLangText('ar');
+        updateSurahDropdowns('ar');
+        populate_verse_options(parseInt(from_surah.value), from_verse, 'ar', parseInt(from_verse.value));
+        populate_verse_options(parseInt(to_surah.value), to_verse, 'ar', parseInt(to_verse.value));
+
+        showHelpModalIfNeeded();
     });
 
 
@@ -285,6 +460,21 @@ document.addEventListener('DOMContentLoaded', () => {
             localStorage.setItem(id, dropdown.value);
         });
     });
+
+    langToggle.addEventListener('change', () => {
+        localStorage.setItem('preferredLanguage', langToggle.value);
+        const lang = langToggle.value;
+
+        helpPages = lang === 'ar' ? helpPagesAr : helpPagesEn;
+
+        updateAllLangText(lang);
+        updateSurahDropdowns(lang);
+
+        populate_verse_options(parseInt(from_surah.value), from_verse, lang, parseInt(from_verse.value));
+        populate_verse_options(parseInt(to_surah.value), to_verse, lang, parseInt(to_verse.value));
+    });
+
+
 
 });
 
@@ -372,10 +562,23 @@ down_arrow.addEventListener('click', () => {
     update_verse_information();
 });
 
-function update_verse_information(){
+function update_verse_information() {
     [current_surah, current_verse] = current_verse_key.split(":").map(Number);
-    current_verse_information.innerText = "Surah: " + getSurahTransliteration(current_surah) + " (" + current_surah + ")" + ", Verse: " + current_verse;
+    const lang = langToggle.value;
+
+    const surahLabel = lang === 'ar' ? "سورة" : "Surah";
+    const verseLabel = lang === 'ar' ? "الآية" : "Verse";
+
+    const surahNumber = lang === 'ar' ? toArabicNumerals(current_surah) : current_surah;
+    const verseNumber = lang === 'ar' ? toArabicNumerals(current_verse) : current_verse;
+
+    const surahName = lang === 'ar'
+        ? surahNames.ar[current_surah - 1]
+        : getSurahTransliteration(current_surah);
+
+    current_verse_information.innerText = `${surahLabel} ${surahName} (${surahNumber})، ${verseLabel} ${verseNumber}`;
 }
+
 
 function current_font(){
     return document.getElementById('font').value;
@@ -504,20 +707,3 @@ const surah_transliterations = {
   
 const reset_button = document.getElementById('reset-button');
 
-reset_button.addEventListener('click', () => {
-
-    from_surah.value = 1;
-    to_surah.value = 114;
-    populate_verse_options(1, from_verse, 1);
-    populate_verse_options(114, to_verse, 6);
-    from_verse.value = 1;
-    to_verse.value = 6;
-    document.getElementById('display-position').value = 'first';
-
-    verse_span.textContent = 'أعوذ بالله من الشيطان الرجيم';
-    current_verse_information.textContent = 'Click Generate';
-
-    current_verse_key = null;
-    current_full_verse = '';
-    showing_full_verse = false;
-});
