@@ -330,14 +330,17 @@ document.addEventListener('DOMContentLoaded', () => {
     } else {
         languageModal.style.display = 'flex';
     }
-
+    
     populate_verse_options(parseInt(from_surah.value), from_verse, lang, parseInt(from_verse.value));
     populate_verse_options(parseInt(to_surah.value), to_verse, lang, parseInt(to_verse.value));
 
     from_surah.value = 1;
     to_surah.value = 114;
     from_verse.value = 1;
-    to_verse.value = 7;
+    to_verse.value = 6;
+
+    populate_verse_options(parseInt(from_surah.value), from_verse, lang, parseInt(from_verse.value));
+    populate_verse_options(parseInt(to_surah.value), to_verse, lang, parseInt(to_verse.value));
 
     const helpModal = document.getElementById('help-modal');
     const helpButton = document.getElementById('help-button');
