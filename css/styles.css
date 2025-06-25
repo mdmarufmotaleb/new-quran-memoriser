@@ -228,7 +228,6 @@ footer {
     color: #4b3f2f;
 }
 
-/* Close button (X) */
 .close-help-button {
     position: absolute;
     top: 1rem;
@@ -242,7 +241,6 @@ footer {
     cursor: pointer;
 }
 
-/* Help content */
 #help-content h2 {
     margin-top: 0;
     font-size: 1.4rem;
@@ -393,4 +391,10 @@ select.rtl {
   direction: rtl;
   text-align: right;
   background-position: left center;
+}
+
+#help-button,
+#lang-toggle {
+    width: 110px;
+    height: 2.2rem;
 }
