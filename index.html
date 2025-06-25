@@ -289,11 +289,9 @@
         <section class="verse-display">
             <div class="verse-box">
                 <div class="eye-stack">
-                    <i data-lucide="chevron-up" class="stack-icon"></i>
                     <button class="icon-button eye-icon" aria-label="Show Verse">
                         <i data-lucide="eye"></i>
                     </button>
-                    <i data-lucide="chevron-down" class="stack-icon"></i>
                 </div>
                 <span>أعوذ بالله من الشيطان الرجيم</span>
             </div>
@@ -301,6 +299,14 @@
                <p id="verse-text" class="lang-text" data-key="surah_verse">Surah: ..., Verse: ...</p>
             </div>
         </section>
+        <div style="display: flex; justify-content: space-between; gap: 1rem;">
+            <button id="next-verse" class="generate-button lang-text" data-key="next_verse">
+                Next Verse
+            </button>
+            <button id="previous-verse" class="generate-button lang-text" data-key="previous_verse">
+                Previous Verse
+            </button>
+        </div>
     <footer>
     <div class="footer-inner content-width">
         <div style="height: 1rem;"></div>

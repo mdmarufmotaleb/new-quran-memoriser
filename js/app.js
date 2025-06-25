@@ -99,6 +99,8 @@ const translations = {
         page_of: "Page {x} of {y}",
         back: "Back",
         next: "Next",
+        next_verse: "Next Verse",
+        previous_verse: "Previous Verse",
     },
     ar: {
         help: 'مساعدة',
@@ -116,6 +118,8 @@ const translations = {
         page_of: "الصفحة {x} من {y}",
         back: "رجوع",
         next: "التالي",
+        next_verse: "الآية التالية",
+        previous_verse: "الآية السابقة"
     }
 };
 
@@ -549,8 +553,8 @@ eye_button.addEventListener('click', () => {
     verse_span.textContent = showing_full_verse ? current_full_verse : get_display_text(current_full_verse);
 });
 
-const up_arrow = document.querySelector('[data-lucide="chevron-up"]');
-const down_arrow = document.querySelector('[data-lucide="chevron-down"]');
+const up_arrow = document.querySelector('#previous-verse');
+const down_arrow = document.querySelector('#next-verse');
 
 up_arrow.addEventListener('click', () => {
 
