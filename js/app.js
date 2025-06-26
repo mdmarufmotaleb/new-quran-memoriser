@@ -557,23 +557,14 @@ const up_arrow = document.querySelector('#previous-verse');
 const down_arrow = document.querySelector('#next-verse');
 
 up_arrow.addEventListener('click', () => {
-
-    [current_surah, current_verse] = current_verse_key.split(":").map(Number);
-
-    if (current_verse > 1) {
-        current_verse = current_verse - 1;
-    } else if (current_surah > 1) {
-        current_surah = current_surah - 1;
-        current_verse = verse_counts[current_surah - 1];
-    }
-
-    current_verse_key = `${current_surah}:${current_verse}`;
-    generate_text(`${current_surah}:${current_verse}`);
-    update_verse_information();
+    previous_verse();
 });
 
 down_arrow.addEventListener('click', () => {
+    next_verse();
+});
 
+function next_verse() {
     [current_surah, current_verse] = current_verse_key.split(":").map(Number);
 
     const total_verses_current_surah = verse_counts[current_surah];
@@ -587,6 +578,29 @@ down_arrow.addEventListener('click', () => {
     current_verse_key = `${current_surah}:${current_verse}`;
     generate_text(`${current_surah}:${current_verse}`);
     update_verse_information();
+}
+
+function previous_verse() {
+    [current_surah, current_verse] = current_verse_key.split(":").map(Number);
+
+    if (current_verse > 1) {
+        current_verse = current_verse - 1;
+    } else if (current_surah > 1) {
+        current_surah = current_surah - 1;
+        current_verse = verse_counts[current_surah - 1];
+    }
+
+    current_verse_key = `${current_surah}:${current_verse}`;
+    generate_text(`${current_surah}:${current_verse}`);
+    update_verse_information();
+}
+
+document.addEventListener('keydown', function(event) {
+  if (event.key === 'ArrowRight') {
+    previous_verse();
+  } else if (event.key === 'ArrowLeft') {
+    next_verse();
+  }
 });
 
 function update_verse_information() {
