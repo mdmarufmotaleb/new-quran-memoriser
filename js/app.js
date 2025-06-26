@@ -504,8 +504,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 });
 
-
-generate_button.addEventListener('click', () => {
+function generate_button_click() {
     const surah_min = from_surah.value;
     const verse_min = from_verse.value;
     const surah_max = to_surah.value;
@@ -514,7 +513,12 @@ generate_button.addEventListener('click', () => {
     current_verse_key = get_random_verse_key(`${surah_min}:${verse_min}`, `${surah_max}:${verse_max}`);
     generate_text(current_verse_key);
     update_verse_information();
+}
+
+generate_button.addEventListener('click', () => {
+    generate_button_click();
 });
+
 
 function generate_text(verse_key) {
     let endpoint;
@@ -554,12 +558,6 @@ function show_full_verse() {
 
 eye_button.addEventListener('click', () => {
     show_full_verse();
-});
-
-document.addEventListener('keydown', function(event) {
-  if (event.code === 'ShiftLeft' || event.code === 'ShiftRight') {
-    show_full_verse();
-  }
 });
 
 const up_arrow = document.querySelector('#previous-verse');
@@ -609,7 +607,12 @@ document.addEventListener('keydown', function(event) {
     previous_verse();
   } else if (event.key === 'ArrowLeft') {
     next_verse();
-  }
+  } else if (event.code === 'ShiftLeft' || event.code === 'ShiftRight') {
+    show_full_verse();
+  } else if(event.code === 'Space') {
+    generate_button_click();
+    event.preventDefault();
+  };
 });
 
 function update_verse_information() {
