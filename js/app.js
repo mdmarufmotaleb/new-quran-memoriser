@@ -546,11 +546,20 @@ function get_display_text(text) {
     }
 }
 
-
-eye_button.addEventListener('click', () => {
+function show_full_verse() {
     if (!current_full_verse) return;
     showing_full_verse = !showing_full_verse;
     verse_span.textContent = showing_full_verse ? current_full_verse : get_display_text(current_full_verse);
+}
+
+eye_button.addEventListener('click', () => {
+    show_full_verse();
+});
+
+document.addEventListener('keydown', function(event) {
+  if (event.code === 'ShiftLeft' || event.code === 'ShiftRight') {
+    show_full_verse();
+  }
 });
 
 const up_arrow = document.querySelector('#previous-verse');
@@ -746,5 +755,3 @@ const surah_transliterations = {
     return surah_transliterations[number];
   }
   
-const reset_button = document.getElementById('reset-button');
-
