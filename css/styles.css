@@ -316,9 +316,8 @@ footer {
     }
 
     body {
-        font-size: 0.9rem;
-            transform: scale(0.9);
-            transform-origin: top;
+        transform: scale(0.9);
+        transform-origin: top;
         }
 
     header h1 {
@@ -327,7 +326,7 @@ footer {
     }
 
     select, .dropdown-style-button {
-        height: 1.8rem;
+        height: 1.9rem;
         font-size: 0.85rem;
     }
 
