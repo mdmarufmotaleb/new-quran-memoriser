@@ -520,22 +520,44 @@ generate_button.addEventListener('click', () => {
 });
 
 
+let verses_uthmani = null;
+let verses_indopak = null;
+
+function load_local_verses() {
+  return Promise.all([
+    fetch('uthmani_verses.json').then(res => res.json()).then(json => { verses_uthmani = json; }),
+    fetch('indopak_verses.json').then(res => res.json()).then(json => { verses_indopak = json; }),
+  ]);
+}
+
+load_local_verses();
+
 function generate_text(verse_key) {
-    let endpoint;
-    if (current_font() === "IndoPak"){
-        endpoint = `https://api.quran.com/api/v4/verses/by_key/${verse_key}?fields=text_indopak`;
-    } else {
-        endpoint = `https://api.quran.com/api/v4/verses/by_key/${verse_key}?fields=text_uthmani`;
+  if (!verses_uthmani || !verses_indopak) {
+    console.error('Local verses data not loaded yet');
+    return;
+  }
+
+  const [surah, verse] = verse_key.split(':').map(Number);
+  let verse_text;
+
+  if (current_font() === "IndoPak") {
+    if (!verses_indopak[surah] || !verses_indopak[surah][verse]) {
+      console.error(`Verse ${verse_key} not found in IndoPak data`);
+      return;
     }
-    
-    fetch(endpoint)
-        .then(res => res.json())
-        .then(data => {
-            const verse_text = extract_verse_text(data);
-            current_full_verse = verse_text;
-            showing_full_verse = false;
-            verse_span.textContent = get_display_text(verse_text);
-        });
+    verse_text = verses_indopak[surah][verse];
+  } else {
+    if (!verses_uthmani[surah] || !verses_uthmani[surah][verse]) {
+      console.error(`Verse ${verse_key} not found in Uthmani data`);
+      return;
+    }
+    verse_text = verses_uthmani[surah][verse];
+  }
+
+  current_full_verse = verse_text;
+  showing_full_verse = false;
+  verse_span.textContent = get_display_text(verse_text);
 }
 
 function get_display_text(text) {
