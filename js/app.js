@@ -594,7 +594,7 @@ function previous_verse() {
         current_verse = current_verse - 1;
     } else if (current_surah > 1) {
         current_surah = current_surah - 1;
-        current_verse = verse_counts[current_surah - 1];
+        current_verse = verse_counts[current_surah];
     }
 
     current_verse_key = `${current_surah}:${current_verse}`;
