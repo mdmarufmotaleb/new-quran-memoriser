@@ -221,17 +221,27 @@ function get_last_three_words(text) {
 }
 
 function get_middle_three_words(text) {
-    const words = text.split(' ');
+    const words = text.replace(/۞/g, '').split(' ');
     const total = words.length;
 
     if (total <= 3) {
-        return words.join(' ').replace(/۞/g, '');
+        return words.join(' ');
     }
 
-    const mid = Math.floor(total / 2);
-    const start = Math.max(0, mid - 1);
-    return ("... " + words.slice(start, start + 3).join(' ') + " ...").replace(/۞/g, '');
+    const maxStartIndex = total - 3;
+    const randomIndex = Math.floor(Math.random() * (maxStartIndex + 1));
+
+    const segment = words.slice(randomIndex, randomIndex + 3).join(' ');
+
+    if (randomIndex == 0) {
+        return `... ${segment}`;
+    } else if (randomIndex >= total - 4) {
+        return `${segment} ...`;
+    } else {
+        return `... ${segment} ...`;
+    }
 }
+
 
 
 from_surah.addEventListener('change', () => {
