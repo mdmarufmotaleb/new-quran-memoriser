@@ -403,3 +403,22 @@ select.rtl {
     width: 100px;
     height: 1.9rem;
 }
+
+.verse-info-box {
+    background-color: transparent;
+    padding: 0;
+    min-height: auto;
+}
+
+.verse-info-box span {
+    margin: 0;
+}
+
+.verse-info-box #verse-text {
+    margin: 0;
+    text-align: center;
+}
+
+.verse-info-box .eye-stack {
+    padding-top: 1rem;
+}

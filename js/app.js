@@ -15,6 +15,9 @@ let showing_full_verse = false;
 
 let current_surah, current_verse;
 
+let show_verse_information = false;
+
+
 const verse_counts = {
     1: 7, 2: 286, 3: 200, 4: 176, 5: 120, 6: 165, 7: 206, 8: 75, 9: 129,
     10: 109, 11: 123, 12: 111, 13: 43, 14: 52, 15: 99, 16: 128, 17: 111,
@@ -109,7 +112,8 @@ const translations = {
         select_from: "اختر من:",
         select_to: "اختر إلى:",
         display_verse: "عرض الآية:",
-        surah_verse: "الآية ...، سورة ...",
+        surah_verse: "... الآية ...، سورة",
+
         from_beginning: "من البداية",
         from_middle: "من الوسط",
         from_end: "من النهاية",
@@ -638,20 +642,22 @@ document.addEventListener('keydown', function(event) {
 });
 
 function update_verse_information() {
-    [current_surah, current_verse] = current_verse_key.split(":").map(Number);
-    const lang = langToggle.value;
+    if (show_verse_information == true){
+        [current_surah, current_verse] = current_verse_key.split(":").map(Number);
+        const lang = langToggle.value;
 
-    const surahLabel = lang === 'ar' ? "سورة" : "Surah";
-    const verseLabel = lang === 'ar' ? "الآية" : "Verse";
+        const surahLabel = lang === 'ar' ? "سورة" : "Surah";
+        const verseLabel = lang === 'ar' ? "الآية" : "Verse";
 
-    const surahNumber = lang === 'ar' ? toArabicNumerals(current_surah) : current_surah;
-    const verseNumber = lang === 'ar' ? toArabicNumerals(current_verse) : current_verse;
+        const surahNumber = lang === 'ar' ? toArabicNumerals(current_surah) : current_surah;
+        const verseNumber = lang === 'ar' ? toArabicNumerals(current_verse) : current_verse;
 
-    const surahName = lang === 'ar'
-        ? surahNames.ar[current_surah - 1]
-        : getSurahTransliteration(current_surah);
+        const surahName = lang === 'ar'
+            ? surahNames.ar[current_surah - 1]
+            : getSurahTransliteration(current_surah);
 
-    current_verse_information.innerText = `${surahLabel} ${surahName} (${surahNumber})، ${verseLabel} ${verseNumber}`;
+        current_verse_information.innerText = `${surahLabel} ${surahName} (${surahNumber})، ${verseLabel} ${verseNumber}`;
+    };
 }
 
 
@@ -780,3 +786,26 @@ const surah_transliterations = {
     return surah_transliterations[number];
   }
   
+function updateVerseLabelDisplay() {
+    if (show_verse_information) {
+        update_verse_information();
+    } else {
+        current_verse_information.innerText = translations[langToggle.value]["surah_verse"];
+    }
+}
+
+const toggleInfoButton = document.getElementById("toggle-info-button");
+if (toggleInfoButton) {
+    toggleInfoButton.addEventListener("click", () => {
+        show_verse_information = !show_verse_information;
+        updateVerseLabelDisplay();
+    });
+}
+
+document.addEventListener("keydown", (e) => {
+    if (e.key === "/") {
+        e.preventDefault();
+        show_verse_information = !show_verse_information;
+        updateVerseLabelDisplay();
+    }
+});
