@@ -92,9 +92,9 @@ const translations = {
         generate: "Generate",
         select_from: "Select from:",
         select_to: "Select to:",
-        display_verse: "Display verse:",
+        display_verse: "Display words:",
         surah_verse: "Surah: ..., Verse: ...",
-        from_beginning: "From beginning",
+        from_beginning: "From start",
         from_middle: "From middle",
         from_end: "From end",
         uthmani: "Uthmani Font",
@@ -111,9 +111,8 @@ const translations = {
         generate: "عرض",
         select_from: "اختر من:",
         select_to: "اختر إلى:",
-        display_verse: "عرض الآية:",
+        display_verse: "عرض الكلمات:",
         surah_verse: "... الآية ...، سورة",
-
         from_beginning: "من البداية",
         from_middle: "من الوسط",
         from_end: "من النهاية",
@@ -310,7 +309,7 @@ document.addEventListener('DOMContentLoaded', () => {
         <ul style="padding-left: 1.2rem;">
         <li>Pick a Surah and verse range</li>
         <li>Click <strong>Generate</strong> for a new verse</li>
-        <li>Use the <strong>eye icon</strong> to show the full verse</li>
+        <li>Use the <strong>eye icon</strong> to show the full verse or Surah number</li>
         <li>Display 3 consecutive words anywhere from that verse</li>
         <li>Choose between <strong>Uthmani</strong> and <strong>IndoPak</strong> fonts</li>
         </ul>
@@ -340,7 +339,7 @@ document.addEventListener('DOMContentLoaded', () => {
             <ul style="padding-right: 1.2rem; text-align: right;">
             <li>اختر السورة ونطاق الآيات</li>
             <li>انقر على <strong>عرض</strong> للحصول على آية جديدة</li>
-            <li>استخدم <strong>رمز العين</strong> لإظهار الآية الكاملة</li>
+            <li>استخدم <strong>رمز العين</strong> لإظهار الآية الكاملة أو رقم السورة</li>
             <li>اعرض ثلاث كلمات متتالية من الآية</li>
             <li>اختر بين خط <strong>عثماني</strong> أو <strong>إندوباك</strong></li>
             </ul>
